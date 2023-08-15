@@ -1,0 +1,10 @@
+SELECT 
+    ROUND(calcs.average, 0) AS average,
+    calcs.median,
+    ROUND(calcs.average - calcs.median, 0) AS median_average_diff
+FROM (
+    SELECT 
+        AVG(p0010001) AS average,
+        PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY p0010001) AS median
+    FROM us_counties_2010
+) calcs;
